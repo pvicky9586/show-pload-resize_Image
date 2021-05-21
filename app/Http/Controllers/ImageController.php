@@ -23,22 +23,18 @@ class ImageController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
         if ($request->file){
-
-    	$image = $request->file;
-    	$filename = $image->getClientOriginalName();
-    	$image_resize = Image::make($image->getRealPath());
-    	$image_resize->resize(300,300);
-    	//$image_resize->save(public_path('images/'.$filename));
-        $pash = Storage::disk('public')->put('/files',$request->file('file'));  
-        $New = new Imagen;  
-        $New->file = $pash;           
-        $New->name = $filename;
-        $New->save();
-        //$this->resizeImage();
-    	//return "imagen subida a public y renderisada exitosamente";
-       
-    }
-    $imagens = Imagen::all();
-    return view('resize-image',compact('imagens'));
+        	$image = $request->file;
+        	$filename = $image->getClientOriginalName();
+        	$image_resize = Image::make($image->getRealPath());
+        	$image_resize->resize(300,300); //method resize no esta funcionando ?
+            $pash = Storage::disk('public')->put('/files',$request->file('file'));  
+            $New = new Imagen;  
+            $New->file = $pash;           
+            $New->name = $filename;
+            $New->save();
+        	//return "imagen subida a public y renderisada exitosamente";
+        }
+        $imagens = Imagen::all();
+        return view('resize-image',compact('imagens'));
     }
 }
