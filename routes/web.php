@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/resize-image',[ImageController::class,'resizeImage']);
+
+
+Route::get('/',[ImageController::class,'resizeImage']);
 
 Route::post('/resize-image',[ImageController::class,'resizeImageSubmit'])->name('image-resize');
